@@ -12,15 +12,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import net.sf.ehcache.Cache;
-import net.sf.ehcache.CacheManager;
-import net.sf.ehcache.Ehcache;
-import net.sf.ehcache.Element;
-import net.sf.ehcache.config.CacheConfiguration;
-import net.sf.ehcache.search.Query;
-import net.sf.ehcache.search.Result;
-import net.sf.ehcache.search.Results;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +28,7 @@ import com.mongodb.DBObject;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class MongoDBAccessObject {
 
-	private static CacheManager cacheManager;
+	//private static CacheManager cacheManager;
 
 	public static BasicDBList select(String queryName, JSONArray filtersJSON, Object value) throws JSONException, IOException {
 		return select(queryName, filtersJSON, value, 0, 0, null);
@@ -59,22 +50,22 @@ public class MongoDBAccessObject {
 			queryName = iterator.next().toString();
 
 			String cacheName = AppConfig.getQueryCacheInfo(queryName);
-			if (cacheName != null) {
-				Results queryResults = getFromCache(cacheName);
-				if (queryResults != null && queryResults.all().size() > 0) {
-					for (Result result : queryResults.all()) {
-						list.add(result.getValue());
-					}
-					queryResults.discard();
-					continue;
-				}
-			}
+//			if (cacheName != null) {
+//				Results queryResults = getFromCache(cacheName);
+//				if (queryResults != null && queryResults.all().size() > 0) {
+//					for (Result result : queryResults.all()) {
+//						list.add(result.getValue());
+//					}
+//					queryResults.discard();
+//					continue;
+//				}
+//			}
 
 			Iterable<DBObject> results = select(AppConfig.getQueryInfo(queryName), filtersJSON, value, skip, limit, sortOrderMap);
 			for (DBObject result : results) {
 				list.add(result);
 				if (cacheName != null) {
-					putInCache(cacheName, result);
+					//putInCache(cacheName, result);
 				}
 			}
 
@@ -82,7 +73,7 @@ public class MongoDBAccessObject {
 
 		return list;
 	}
-
+/*
 	private static Results getFromCache(String cacheName) {
 		Ehcache cache = getOrCreateCache(cacheName);
 		Query query = cache.createQuery();
@@ -116,7 +107,7 @@ public class MongoDBAccessObject {
 		}
 		return cacheManager;
 	}
-
+*/
 	private static Iterable select(JSONObject queryJSON, JSONArray filtersJSON, Object value, int skip, int limit, Map<String, Integer> sortOrderMap) throws JSONException, IOException {
 		if (queryJSON.has("GROUPBY")) {
 			return aggregate(queryJSON, filtersJSON, value, skip, limit, sortOrderMap);

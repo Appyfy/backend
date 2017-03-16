@@ -1,6 +1,7 @@
 package rnd.data;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class DataController extends HttpServlet {
 
 	protected void fetchData(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		String[] args = request.getRequestURI().split("/");
+		String[] args = URLDecoder.decode(request.getRequestURI(),"utf-8").split("/");
 
 		DBObject queryObj = new BasicDBObject();
 		
@@ -50,6 +51,12 @@ public class DataController extends HttpServlet {
 				}
 			}
 		}
+		
+//		Map paramMap = request.getParameterMap();
+//		for (Iterator iterator = paramMap.entrySet().iterator(); iterator.hasNext();) {
+//			Entry entry = (Entry) iterator.next();
+//			queryObj.put(entry.getKey().toString(), entry.getValue());
+//		}
 
 		DBCursor cursor = MongoDBIntegrator.DBHolder.SINGLETON.getDB().getCollection(args[3]).find(queryObj);
 
