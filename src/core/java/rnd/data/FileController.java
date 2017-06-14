@@ -10,11 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import rnd.util.IOUtils;
 
-/**
- * @author Vinod Pahuja
- * 
- */
-
 // @Named
 // @RequestScoped
 // @WebServlet(asyncSupported = true, urlPatterns = "/data")

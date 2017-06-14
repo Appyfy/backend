@@ -15,11 +15,6 @@ import rnd.dao.nosql.mongodb.MongoDBAccessObject;
 
 import com.mongodb.BasicDBList;
 
-/**
- * @author Vinod Pahuja
- *
- */
-
 @Named
 public class QueryDataController extends HttpServlet {
 

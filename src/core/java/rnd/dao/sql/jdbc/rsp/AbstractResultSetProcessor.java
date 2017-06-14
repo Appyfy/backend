@@ -7,9 +7,6 @@ import java.sql.SQLException;
 import rnd.dao.sql.jdbc.rp.RowProcessor;
 import rnd.dao.sql.jdbc.rsmdp.ResultSetMetaDataProcessor;
 
-/**
- * @author Vinod.Pahuja
- */
 public abstract class AbstractResultSetProcessor implements ResultSetProcessor {
 
 	protected AbstractResultSetProcessor() {

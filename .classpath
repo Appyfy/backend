@@ -8,6 +8,8 @@
 	<classpathentry kind="src" path="src/etl/resources"/>
 	<classpathentry kind="src" path="src/analytic/java"/>
 	<classpathentry kind="src" path="src/analytic/resources"/>
+	<classpathentry kind="src" path="src/ai/java"/>
+	<classpathentry kind="src" path="src/ai/resources"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="com.google.appengine.eclipse.core.GAE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">

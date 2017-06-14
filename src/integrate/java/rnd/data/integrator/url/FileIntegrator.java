@@ -11,10 +11,8 @@ public class FileIntegrator extends AbstractDataProcessor<Map, InputStream> impl
 
 	@Override
 	public InputStream process(Map requestPayLoad) throws Throwable {
-
-		InputStream is = new FileInputStream("E:/Vinod/MyLab/MyDashboard/Sample/" + requestPayLoad.get("fileName") + ".xls");
+		InputStream is = new FileInputStream(requestPayLoad.get("fileName") + ".xls");
 		return is;
-
 	}
 
 }

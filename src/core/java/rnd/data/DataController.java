@@ -19,11 +19,6 @@ import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import com.mongodb.util.JSON;
 
-/**
- * @author Vinod Pahuja
- * 
- */
-
 // @Named
 // @RequestScoped
 // @WebServlet(asyncSupported = true, urlPatterns = "/data")
