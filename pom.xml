@@ -27,23 +27,27 @@
 			<version>3.5.0</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.7</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20140107</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/core/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/integrate/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/etl/resources</directory>
-			</resource>
-			<resource>
-				<directory>src/analytic/resources</directory>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -52,12 +56,6 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
-					<includes>
-						<include>src/core/java</include>
-						<include>src/integrate/java</include>
-						<include>src/etl/java</include>
-						<include>src/analytic/java</include>
-					</includes>
 				</configuration>
 			</plugin>
 			<plugin>
