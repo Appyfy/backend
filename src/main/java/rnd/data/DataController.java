@@ -26,6 +26,12 @@ public class DataController extends HttpServlet {
 
 	private static final long serialVersionUID = -1514025477286265688L;
 
+	private void sanitizeID(DBObject queryObj) {
+		if (queryObj.containsField("ID")) {
+			((BasicDBObject) queryObj).put("_id", new ObjectId(queryObj.removeField("ID").toString()));
+		}
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		fetchData(request, response);
 	}
@@ -41,7 +47,7 @@ public class DataController extends HttpServlet {
 			String[] params = queryStr.split("&");
 			for (String param : params) {
 				String[] keyVal = param.split("=");
-				if(keyVal.length > 1){
+				if(keyVal.length > 1) {
 					queryObj.put(keyVal[0], keyVal[1]);
 				}
 			}
@@ -53,6 +59,8 @@ public class DataController extends HttpServlet {
 //			queryObj.put(entry.getKey().toString(), entry.getValue());
 //		}
 
+		sanitizeID(queryObj);
+		
 		DBCursor cursor = MongoDBIntegrator.DBHolder.SINGLETON.getDB().getCollection(args[3]).find(queryObj);
 
 		List list = new ArrayList();
@@ -75,9 +83,7 @@ public class DataController extends HttpServlet {
 		String data = request.getReader().readLine();
 
 		DBObject dbObject = (DBObject) JSON.parse(data);
-		if (dbObject.containsField("ID")) {
-			((BasicDBObject) dbObject).put("_id", new ObjectId(dbObject.removeField("ID").toString()));
-		}
+		sanitizeID(dbObject);
 		MongoDBIntegrator.DBHolder.SINGLETON.getDB().getCollection(args[3]).save(dbObject);
 	}
 
